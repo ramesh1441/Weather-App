@@ -14,26 +14,19 @@ dayjs.extend(window.dayjs_plugin_timezone);
 function appendSearchHistory() {
   searchHistory.innerHTML = '';
 
-  // Start at end of history array and count down to show the most recent at the top.
-
   for (var i = History.length - 1; i >= 0; i--) {
     var btn = document.createElement('button');
-   //btn.setAttribute('type', 'button');
-   //btn.setAttribute('aria-controls', 'today forecast');
+
     btn.classList.add('history-btn', 'btn-history');
 
-    // `data-search` allows access to city name when click handler is invoked
     btn.setAttribute('data-search', History[i]);
     btn.textContent = History[i];
     searchHistory.append(btn);
   }
 }
 
-// Function to update history in local storage then updates displayed history.
-
 function appendHistory(search) {
-  // If there is no search term return the function
- 
+  
   if (History.indexOf(search) !== -1) {
     return;
   }
@@ -43,7 +36,6 @@ function appendHistory(search) {
   appendSearchHistory();
 }
 
-// Function to get search history from local storage
 function localStorageHistory() {
   var storageHistory = localStorage.getItem('search-history');
   if (storageHistory) {
@@ -52,10 +44,9 @@ function localStorageHistory() {
   appendSearchHistory();
 }
 
-// Function to display the current weather data fetched from OpenWeather api.
 function displayWeather(city, weather) {
   var date = dayjs().format('M/D/YYYY');
-  // Store response data from our fetch request in variables
+  
   var temperature = weather.main.temp;
   var windSpeed = weather.wind.speed;
   var humidity = weather.main.humidity;
@@ -93,10 +84,8 @@ function displayWeather(city, weather) {
   todayWeather.append(block);
 }
 
-// Function to display a forecast card given an object from open weather api
-// daily forecast.
 function displayForecastBlock(forecast) {
-  // variables for data from api
+
   var imageIconURL = `https://openweathermap.org/img/w/${forecast.weather[0].icon}.png`;
   var iconDescription = forecast.weather[0].description;
   var temperature = forecast.main.temp;
@@ -126,7 +115,6 @@ function displayForecastBlock(forecast) {
   windEl.setAttribute('class', 'block-text');
   humidityEl.setAttribute('class', 'block-text');
 
-  // Add content to elements
   blockTitle.textContent = dayjs(forecast.dt_txt).format('M/D/YYYY');
   weatherIcon.setAttribute('src', imageIconURL);
   weatherIcon.setAttribute('alt', iconDescription);
@@ -137,9 +125,8 @@ function displayForecastBlock(forecast) {
   weatherForecast.append(col);
 }
 
-// Function to display 5 day forecast.
 function displayForecast(dailyForecast) {
-  // Create unix timestamps for start and end of 5 day forecast
+  
   var startDt = dayjs().add(1, 'day').startOf('day').unix();
   var endDt = dayjs().add(6, 'day').startOf('day').unix();
 
@@ -155,10 +142,8 @@ function displayForecast(dailyForecast) {
 
   for (var i = 0; i < dailyForecast.length; i++) {
 
-    // First filters through all of the data and returns only data that falls between one day after the current data and up to 5 days later.
     if (dailyForecast[i].dt >= startDt && dailyForecast[i].dt < endDt) {
 
-      // Then filters through the data and returns only data captured at noon for each day.
       if (dailyForecast[i].dt_txt.slice(11, 13) == "12") {
         displayForecastBlock(dailyForecast[i]);
       }
@@ -170,10 +155,6 @@ function displayItems(city, data) {
   displayWeather(city, data.list[0], data.city.timezone);
   displayForecast(data.list);
 }
-
-// Fetches weather data for given location from the Weather Geolocation
-// endpoint; then, calls functions to display current and forecast weather data.
-
 
 function fetchWeather(location) {
   var { lat } = location;
@@ -227,7 +208,7 @@ function handleSearchFormSubmit(e) {
 }
 
 function handleSearchHistoryClick(e) {
-  // Don't do search if current elements is not a search history button
+
   if (!e.target.matches('.btn-history')) {
     return;
   }
