@@ -58,19 +58,7 @@
   button {
     margin: 0;
   }
-  /*
-  a {
-    color: #d4e6ee;
   
-  }
-  
-  a:hover {
-    color: #b2cfdd;
-    
-  }
-  */
-  
-  /* Padding - all sides */
   .p-0 {
     padding: 0;
   }
@@ -140,54 +128,7 @@
     color: #1a1a1a !important;
   }
   */
-  /*
-  .text-white {
-    color: #ffffff !important;
-  }
   
-  .text-black {
-    color: #000000 !important;
-  }
-  
-  .text-link {
-    color: #1b89bc !important;
-  }
-  
-  /* BACKGROUND UTILS */
-  /*
-  .bg-primary {
-    background-color: #020c18 !important;
-  }
-  
-  .bg-info {
-    background-color: #1bbc9b !important;
-  }
-  
-  .bg-danger {
-    background-color: #e64c66 !important;
-  }
-  
-  .bg-light {
-    background-color: #d9e9e8 !important;
-  }
-  
-  .bg-dark {
-    background-color: #1a1a1a !important;
-  }
-  
-  .bg-white {
-    background-color: #ffffff !important;
-  }
-  
-  .bg-black {
-    background-color: #000000 !important;
-  }
-  
-  .bg-link {
-    background-color: #1b89bc !important;
-  }
-  */
-  /* DISPLAY */
   .display-none {
     display: none !important;
   }
